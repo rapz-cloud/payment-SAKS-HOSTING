@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Saks Hosting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .option h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dana-option {
+            border-top: 4px solid #00c2ff;
+        }
+
+        .qris-option {
+            border-top: 4px solid #6a5acd;
+        }
+
+        .payment-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+
+        .payment-info p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 10px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .qris-image {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+            margin: 15px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .qris-image:hover {
+            transform: scale(1.03);
+        }
+
+        .instructions {
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .instructions h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .highlight {
+            color: #ffdd40;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .payment-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .option {
+                width: 100%;
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100vw);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-server"></i> PAYMENT SAKS HOSTING</h1>
+            <p>Layanan pembayaran hosting cepat dan aman</p>
+        </header>
+
+        <div class="payment-options">
+            <div class="option dana-option">
+                <h2><i class="fab fa-d-and-d"></i> Pembayaran DANA</h2>
+                <div class="payment-info">
+                    <p>
+                        <i class="fas fa-phone-alt"></i> 
+                        <span>081288324083</span>
+                        <button class="copy-btn" onclick="copyToClipboard('081288324083', 'Nomor DANA berhasil disalin!')">
+                            <i class="fas fa-copy"></i> Salin
+                        </button>
+                    </p>
+                </div>
+                <p class="highlight">Transfer sesuai dengan nominal pembayaran Anda</p>
+            </div>
+
+            <div class="option qris-option">
+                <h2><i class="fas fa-qrcode"></i> Pembayaran QRIS</h2>
+                <img src="https://files.catbox.moe/xpjofl.jpg" alt="QR Code Pembayaran" class="qris-image">
+                <p>Scan QRIS di atas menggunakan aplikasi mobile banking atau e-wallet Anda</p>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> Instruksi Pembayaran</h3>
+            <ol>
+                <li>Lakukan pembayaran melalui DANA atau scan QRIS di atas</li>
+                <li>Setelah pembayaran berhasil, simpan bukti transfer</li>
+                <li>Kirim bukti transfer kepada admin melalui WhatsApp atau email</li>
+                <li>Hosting Anda akan diaktifkan dalam waktu maksimal 1x24 jam</li>
+            </ol>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 Payment Saks Hosting. Layanan pembayaran hosting terpercaya.</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification">
+        <span id="notification-text"></span>
+    </div>
+
+    <script>
+        function copyToClipboard(text, message) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            showNotification(message);
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notification-text');
+            
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
